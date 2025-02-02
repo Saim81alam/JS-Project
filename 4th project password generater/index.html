@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generater</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Generate a <br> <span>Random Password</span></h1>
+        <div class="displayInput">
+        <input type="text" id="user" placeholder="Full Name"><br>
+        <input type="tel" id="Pnumber" placeholder="Phone" >
+        </div>
+        <div class="display">
+            <input type="text" id="password" placeholder="Password">
+            <img src="images/copy.png" onclick="copyPassword()">
+        </div>
+        <button onclick="generatePassword()"><img src="images/generate.png" >Generate Password</button>
+    </div>
+
+</body>
+<script>
+    const user = document.getElementById('user');
+    const number = document.getElementById('Pnumber');
+    const specialWord = "@#$%&";
+    const passwordBox = document.querySelector('#password');
+
+    function generatePassword(){
+        let userValue = user.value;
+        let numbersValue = number.value
+        const allchars = userValue + numbersValue;
+        const length = 8;
+        let password = "";
+        if(userValue === '' || numbersValue === ''){
+            alert('plz fill details first');
+        }
+        else{
+            while(length > password.length)
+            { 
+                if(password.length == 4){
+                    let randomNumber = Math.random()*specialWord.length;
+                    password += specialWord[Math.round(randomNumber)-1];
+                }
+                else{
+                    password += allchars[Math.floor(Math.random()*allchars.length)];
+                }
+            }
+            passwordBox.value = password;
+            user.value = '';
+            number.value = '';
+        }
+    }
+
+    function copyPassword() {
+        passwordBox.select();
+        document.execCommand('copy');
+    }
+ 
+</script>
+</html>
